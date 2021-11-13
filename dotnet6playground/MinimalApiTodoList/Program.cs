@@ -6,6 +6,7 @@ builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList")
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
+app.Logger.LogInformation("The app started");
 
 
 app.MapGet("/getsample", () =>
@@ -67,5 +68,9 @@ app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
 
     return Results.NotFound();
 });
+
+app.Urls.Add("https://localhost:3000");
+app.Urls.Add("https://localhost:4000");
+
 
 app.Run();
